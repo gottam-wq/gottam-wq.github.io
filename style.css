@@ -337,13 +337,14 @@ footer{border-top:1px solid var(--border);padding:2.5rem 3rem;display:flex;align
 
 /* ══════════════════════════════
    AVATAR PLACEHOLDER FIX
-   (hide placeholder when real img loads)
 ══════════════════════════════ */
-.avatar-img{display:block;}
-.avatar-img + .avatar-placeholder{display:none;}
-/* If img fails to load, show placeholder */
-.avatar-img[src=""]{display:none;}
-.avatar-img[src=""] + .avatar-placeholder{display:flex;}
+.avatar-img{
+  width:100%;height:100%;object-fit:cover;
+  border-radius:50%;border:4px solid var(--card);
+  position:relative;z-index:1;display:block;
+}
+.avatar-placeholder{display:none !important;}
+
 
 /* ══════════════════════════════
    RESPONSIVE
@@ -359,39 +360,62 @@ footer{border-top:1px solid var(--border);padding:2.5rem 3rem;display:flex;align
   .nav-links{display:none;}
   .hamburger{display:flex;}
 
-  /* HERO — full reset for mobile */
+  /* HERO */
   #hero{
     padding:5rem 1.2rem 3rem;
     min-height:100svh;
     align-items:flex-start;
+    overflow:hidden;
   }
   .hero-grid{
     grid-template-columns:1fr;
     text-align:center;
     gap:2rem;
     padding-top:1rem;
+    position:relative;
+    z-index:2;
+  }
+  .hero-left{
+    position:relative;
+    z-index:2;
+    width:100%;
   }
   .hero-right{
     order:-1;
     justify-content:center;
+    position:relative;
+    z-index:2;
+    width:100%;
   }
-  .avatar-wrap{
-    width:200px;
-    height:200px;
-    margin:0 auto;
-  }
-  .avatar-ring{inset:-14px;}
-  .avatar-placeholder i{font-size:3.5rem;}
 
+  /* AVATAR */
+  .avatar-wrap{
+    width:190px;
+    height:190px;
+    margin:0 auto;
+    position:relative;
+  }
+  .avatar-img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    border-radius:50%;
+    border:4px solid var(--card);
+    position:relative;
+    z-index:1;
+    display:block;
+  }
+  .avatar-ring{inset:-12px;}
+
+  /* ORB — push behind content */
+  .glow-orb{opacity:0.08;pointer-events:none;}
+
+  /* TEXT */
   .hero-tag{font-size:0.65rem;padding:0.35rem 0.8rem;}
   h1{font-size:clamp(2.4rem,8vw,3.5rem);letter-spacing:-0.03em;}
   .typing-wrap{font-size:0.88rem;margin:0.8rem 0 0.4rem;}
   .hero-desc{font-size:0.88rem;margin:0.6rem auto 1.6rem;max-width:90%;}
-  .hero-btns{
-    justify-content:center;
-    gap:0.6rem;
-    flex-wrap:wrap;
-  }
+  .hero-btns{justify-content:center;gap:0.6rem;flex-wrap:wrap;}
   .btn{padding:0.75rem 1.4rem;font-size:0.82rem;}
 
   /* SECTIONS */
@@ -415,7 +439,7 @@ footer{border-top:1px solid var(--border);padding:2.5rem 3rem;display:flex;align
   /* FOOTER */
   footer{flex-direction:column;gap:1.2rem;text-align:center;padding:2rem 1.2rem;}
 
-  /* BADGES — hide on mobile */
+  /* BADGES */
   .badge-1,.badge-2{display:none;}
 
   /* PROJECTS */
@@ -430,7 +454,7 @@ footer{border-top:1px solid var(--border);padding:2.5rem 3rem;display:flex;align
   /* INFO CARDS */
   .info-card-value{font-size:0.82rem;word-break:break-all;}
 
-  /* HACKER BOX — narrower on small screens */
+  /* HACKER BOX */
   .hacker-box{width:92vw;}
   .hacker-line{font-size:0.68rem;white-space:normal;}
   .hacker-name{font-size:1.2rem;}
