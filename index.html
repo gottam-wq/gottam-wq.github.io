@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gottam Saini — Full Stack Developer</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ═══ HACKER LOADER ═══ -->
+<div id="loader">
+  <canvas id="matrixCanvas"></canvas>
+  <div class="hacker-box">
+    <div class="hacker-titlebar">
+      <div class="hacker-dot"></div>
+      <div class="hacker-dot"></div>
+      <div class="hacker-dot"></div>
+      <span class="hacker-titlebar-text">terminal — gottam@portfolio:~</span>
+    </div>
+    <div class="hacker-body">
+      <div class="hacker-name" data-text="GOTTAM SAINI">GOTTAM SAINI</div>
+      <div id="hackerLines"></div>
+      <div class="hacker-progress-wrap">
+        <div class="hacker-progress" id="hackerProgress"></div>
+      </div>
+      <div class="hacker-pct" id="hackerPct">0%</div>
+    </div>
+  </div>
+</div>
+
+<div id="progress-bar"></div>
+<div class="cursor" id="cursor"></div>
+<div class="cursor-trail" id="cursorTrail"></div>
+
+<!-- ═══ MOBILE MENU ═══ -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#about" onclick="closeMobile()"><span class="mnumber">01.</span> About</a>
+  <a href="#skills" onclick="closeMobile()"><span class="mnumber">02.</span> Skills</a>
+  <a href="#experience" onclick="closeMobile()"><span class="mnumber">03.</span> Experience</a>
+  <a href="#projects" onclick="closeMobile()"><span class="mnumber">04.</span> Projects</a>
+  <a href="#contact" onclick="closeMobile()"><span class="mnumber">05.</span> Contact</a>
+  <div class="mobile-menu-footer">gottamsaini958@gmail.com</div>
+</div>
+
+<!-- ═══ NAV ═══ -->
+<nav>
+  <div class="nav-logo">GS</div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <button class="hamburger" id="hamburger" onclick="toggleMobile()">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- ═══ HERO ═══ -->
+<section id="hero">
+  <div class="grid-bg"></div>
+  <div class="glow-orb orb1"></div>
+  <div class="glow-orb orb2"></div>
+  <div class="hero-grid">
+    <div class="hero-left">
+      <div class="hero-tag"><span class="dot"></span>Available for work</div>
+      <h1>Gottam<br><span class="accent-text">Saini</span></h1>
+      <div class="typing-wrap">
+        <span class="typing-prefix">I am a </span><span class="typing-text" id="typingText"></span>
+      </div>
+      <p class="hero-desc">Full Stack Developer crafting modern web experiences — from pixel-perfect frontends to powerful backends. Based in Jaipur, India.</p>
+      <div class="hero-btns">
+        <a href="#projects" class="btn btn-primary"><i class="fas fa-rocket"></i> View Projects</a>
+        <a href="#contact" class="btn btn-outline"><i class="fas fa-paper-plane"></i> Hire Me</a>
+        <a href="https://drive.google.com/file/d/1FUCtr-mIm5t0vbbuJVGp5sb47mmepscN/view" class="btn btn-outline" target="_blank"><i class="fas fa-download"></i> Resume</a>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="avatar-wrap">
+        <div class="avatar-ring"></div>
+        <img src="images/port.jpeg" alt="Gottam Saini" class="avatar-img">
+        <div class="avatar-placeholder">
+          <i class="fas fa-user-circle"></i>
+          <span>Your Photo Here</span>
+        </div>
+        <div class="floating-badge badge-1">
+          <span class="badge-icon"><i class="fas fa-code"></i></span><span>Full Stack Dev</span>
+        </div>
+        <div class="floating-badge badge-2">
+          <span class="badge-icon"><i class="fas fa-map-marker-alt"></i></span><span>Jaipur, India</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ ABOUT ═══ -->
+<section id="about">
+  <div class="section-label">01 — About Me</div>
+  <h2>Who I <em>Am</em></h2>
+  <div class="about-grid">
+    <div class="about-text reveal">
+      <p>Hey! I'm Gottam Saini, a passionate Full Stack Developer based in Jaipur, India. I love building digital products that are not only functional but also beautiful and fast.</p>
+      <p>With expertise spanning both frontend and backend, I work with technologies like HTML, CSS, JavaScript, Python, PHP, WordPress, and GoHighLevel to deliver end-to-end solutions.</p>
+      <p>Whether it's a custom WordPress plugin, a Xero integration app, or a full-blown web application — I bring ideas to life with clean code and sharp design.</p>
+    </div>
+    <div class="info-cards">
+      <div class="info-card reveal reveal-delay-1"><div class="info-card-icon"><i class="fas fa-user"></i></div><div><div class="info-card-label">Name</div><div class="info-card-value">Gottam Saini</div></div></div>
+      <div class="info-card reveal reveal-delay-2"><div class="info-card-icon"><i class="fas fa-envelope"></i></div><div><div class="info-card-label">Email</div><div class="info-card-value">gottamsaini958@gmail.com</div></div></div>
+      <div class="info-card reveal reveal-delay-3"><div class="info-card-icon"><i class="fas fa-map-marker-alt"></i></div><div><div class="info-card-label">Location</div><div class="info-card-value">Tonk Phatak, Jaipur</div></div></div>
+      <div class="info-card reveal reveal-delay-4"><div class="info-card-icon"><i class="fas fa-briefcase"></i></div><div><div class="info-card-label">Status</div><div class="info-card-value" style="color:var(--accent);">✦ Open to Opportunities</div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ SERVICES ═══ -->
+<div class="full-width-section services-section">
+  <div class="inner">
+    <div class="section-label">02 — What I Do</div>
+    <h2>My <em>Services</em></h2>
+    <div class="services-grid">
+      <div class="service-card reveal"><div class="service-icon"><i class="fas fa-laptop-code"></i></div><div class="service-title">Web Development</div><div class="service-desc">Full stack web applications built with modern technologies. Fast, responsive, and scalable solutions tailored to your needs.</div></div>
+      <div class="service-card reveal reveal-delay-1"><div class="service-icon"><i class="fab fa-wordpress"></i></div><div class="service-title">WordPress & Plugins</div><div class="service-desc">Custom WordPress themes, plugins, and WooCommerce solutions. Complete CMS setup with admin panels and custom post types.</div></div>
+      <div class="service-card reveal reveal-delay-2"><div class="service-icon"><i class="fas fa-plug"></i></div><div class="service-title">API Integration</div><div class="service-desc">Seamless third-party API integrations including Xero, GoHighLevel, payment gateways, and custom REST API development.</div></div>
+      <div class="service-card reveal reveal-delay-3"><div class="service-icon"><i class="fas fa-database"></i></div><div class="service-title">Database Design</div><div class="service-desc">Efficient MySQL database architecture, query optimization, and data management for web applications of all sizes.</div></div>
+      <div class="service-card reveal reveal-delay-4"><div class="service-icon"><i class="fas fa-bolt"></i></div><div class="service-title">GHL Automation</div><div class="service-desc">GoHighLevel CRM setup, funnel building, automation workflows, and custom integrations for business growth.</div></div>
+      <div class="service-card reveal"><div class="service-icon"><i class="fas fa-mobile-alt"></i></div><div class="service-title">Responsive Design</div><div class="service-desc">Mobile-first, pixel-perfect UI/UX across all devices. Clean HTML/CSS with smooth animations and modern aesthetics.</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ SKILLS ═══ -->
+<section id="skills" style="max-width:100%;padding:6rem 0;">
+  <div style="max-width:1200px;margin:0 auto;padding:0 3rem;">
+    <div class="section-label">03 — Skills</div>
+    <h2>My <em>Tech Stack</em></h2>
+    <div class="skills-grid">
+      <div class="skill-card"><span class="skill-icon" style="color:#e34c26;"><i class="fab fa-html5"></i></span><span class="skill-name">HTML5</span></div>
+      <div class="skill-card"><span class="skill-icon" style="color:#1572b6;"><i class="fab fa-css3-alt"></i></span><span class="skill-name">CSS3</span></div>
+      <div class="skill-card"><span class="skill-icon" style="color:#f7df1e;"><i class="fab fa-js-square"></i></span><span class="skill-name">JavaScript</span></div>
+      <div class="skill-card"><span class="skill-icon" style="color:#3776ab;"><i class="fab fa-python"></i></span><span class="skill-name">Python</span></div>
+      <div class="skill-card"><span class="skill-icon" style="color:#777bb4;"><i class="fab fa-php"></i></span><span class="skill-name">PHP</span></div>
+      <div class="skill-card"><span class="skill-icon" style="color:#21759b;"><i class="fab fa-wordpress"></i></span><span class="skill-name">WordPress</span></div>
+      <div class="skill-card"><span class="skill-icon" style="color:#00f5a0;"><i class="fas fa-bolt"></i></span><span class="skill-name">GoHighLevel</span></div>
+      <div class="skill-card"><span class="skill-icon" style="color:#4479a1;"><i class="fas fa-database"></i></span><span class="skill-name">MySQL</span></div>
+      <div class="skill-card"><span class="skill-icon" style="color:#f05032;"><i class="fab fa-git-alt"></i></span><span class="skill-name">Git</span></div>
+      <div class="skill-card"><span class="skill-icon" style="color:#00d9f5;"><i class="fas fa-server"></i></span><span class="skill-name">REST API</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ PROJECTS ═══ -->
+<section id="projects" style="background:var(--surface);max-width:100%;padding:6rem 0;">
+  <div style="max-width:1200px;margin:0 auto;padding:0 3rem;">
+    <div class="section-label">05 — Projects</div>
+    <h2>Featured <em>Work</em></h2>
+    <div class="projects-grid">
+      <div class="project-card reveal">
+        <div class="project-img">
+          <div class="project-img-placeholder"><i class="fas fa-plug" style="color:#00d9f5;"></i><span>Add screenshot here</span></div>
+          <div class="project-overlay"></div>
+        </div>
+        <div class="project-body">
+          <div class="project-tags"><span class="tag">Python</span><span class="tag">API</span><span class="tag">MySQL</span></div>
+          <div class="project-title">Xero Integration App</div>
+          <div class="project-desc">Connects business systems with Xero accounting. Automates invoicing, payments, and financial data sync in real-time.</div>
+          <a href="#" class="project-link">View Project <i class="fas fa-arrow-right"></i></a>
+        </div>
+      </div>
+      <div class="project-card reveal reveal-delay-1">
+        <div class="project-img">
+          <div class="project-img-placeholder"><i class="fab fa-wordpress" style="color:#21759b;font-size:3rem;"></i><span>Add screenshot here</span></div>
+          <div class="project-overlay"></div>
+        </div>
+        <div class="project-body">
+          <div class="project-tags"><span class="tag">PHP</span><span class="tag">WordPress</span><span class="tag">JS</span></div>
+          <div class="project-title">WordPress Plugin</div>
+          <div class="project-desc">Custom plugin with post types, shortcodes, REST API endpoints, and a full admin dashboard for client sites.</div>
+          <a href="#" class="project-link">View Project <i class="fas fa-arrow-right"></i></a>
+        </div>
+      </div>
+      <div class="project-card reveal reveal-delay-2">
+        <div class="project-img">
+          <div class="project-img-placeholder"><i class="fas fa-bolt" style="color:#00f5a0;font-size:3rem;"></i><span>Add screenshot here</span></div>
+          <div class="project-overlay"></div>
+        </div>
+        <div class="project-body">
+          <div class="project-tags"><span class="tag">GHL</span><span class="tag">Automation</span><span class="tag">API</span></div>
+          <div class="project-title">GHL CRM Automation</div>
+          <div class="project-desc">Complete GoHighLevel CRM setup with custom funnels, automated workflows, and third-party API integrations.</div>
+          <a href="#" class="project-link">View Project <i class="fas fa-arrow-right"></i></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ CONTACT ═══ -->
+<section id="contact">
+  <div class="section-label">06 — Contact</div>
+  <h2>Let's <em>Connect</em></h2>
+  <div class="contact-grid">
+    <div class="contact-info reveal">
+      <h3>Have a project in mind?</h3>
+      <p>I'm always open to discussing new projects, creative ideas, or opportunities. Drop me a message!</p>
+      <div class="contact-items">
+        <a href="mailto:gottamsaini958@gmail.com" class="contact-item"><i class="fas fa-envelope"></i><span>gottamsaini958@gmail.com</span></a>
+        <div class="contact-item"><i class="fas fa-map-marker-alt"></i><span>Tonk Phatak, Jaipur, Rajasthan</span></div>
+        <a href="https://wa.me/919468971373" class="contact-item" target="_blank"><i class="fab fa-whatsapp" style="color:#25d366;"></i><span>WhatsApp Me</span></a>
+        <div class="contact-item"><i class="fas fa-circle" style="color:var(--accent);font-size:0.6rem;"></i><span>Available for Freelance</span></div>
+      </div>
+    </div>
+    <div class="contact-form reveal reveal-delay-2">
+      <div class="form-group"><label>Your Name</label><input type="text" placeholder="John Doe"></div>
+      <div class="form-group"><label>Email Address</label><input type="email" placeholder="john@example.com"></div>
+      <div class="form-group"><label>Message</label><textarea placeholder="Tell me about your project..."></textarea></div>
+      <button class="btn btn-primary" style="width:100%;justify-content:center;cursor:pointer;border:none;font-size:1rem;"><i class="fas fa-paper-plane"></i> Send Message</button>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FOOTER ═══ -->
+<footer>
+  <div>© 2025 Gottam Saini — Full Stack Developer, Jaipur</div>
+  <div class="social-links">
+    <a href="mailto:gottamsaini958@gmail.com"><i class="fas fa-envelope"></i></a>
+    <a href="https://github.com/gottam-wq"><i class="fab fa-github"></i></a>
+    <a href="https://www.linkedin.com/in/gottam-saini-713198294"><i class="fab fa-linkedin-in"></i></a>
+    <a href="https://wa.me/919468971373" target="_blank"><i class="fab fa-whatsapp"></i></a>
+  </div>
+</footer>
+
+<!-- ═══ FLOATING BUTTONS ═══ -->
+<div class="fab-group">
+  <a href="https://wa.me/919468971373" class="fab fab-whatsapp" target="_blank"><i class="fab fa-whatsapp"></i></a>
+  <button class="fab fab-top" id="fabTop" onclick="window.scrollTo({top:0,behavior:'smooth'})"><i class="fas fa-arrow-up"></i></button>
+</div>
+
+<script src="port.js"></script>
+</body>
+</html>
