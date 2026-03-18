@@ -69,59 +69,43 @@
     }, l.delay);
   });
 
-  function hideLoader() {
-    loader.style.transition = 'opacity 0.6s ease';
-    loader.style.opacity = '0';
-    setTimeout(() => {
-      loader.style.display = 'none';
-    }, 700);
-  }
-
-  setTimeout(hideLoader, 3200);
+  setTimeout(() => {
+    loader.classList.add('hide');
+  }, 3200);
 })();
 
 /* ══════════════════════════════
-   CUSTOM CURSOR — Desktop Only
+   CUSTOM CURSOR
 ══════════════════════════════ */
-const isTouchDevice = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
+const cursor = document.getElementById('cursor');
+const trail = document.getElementById('cursorTrail');
+let mx = 0, my = 0, tx = 0, ty = 0;
 
-if (!isTouchDevice) {
-  const cursor = document.getElementById('cursor');
-  const trail = document.getElementById('cursorTrail');
-  let mx = 0, my = 0, tx = 0, ty = 0;
+document.addEventListener('mousemove', e => {
+  mx = e.clientX;
+  my = e.clientY;
+  cursor.style.left = mx - 6 + 'px';
+  cursor.style.top = my - 6 + 'px';
+});
 
-  document.addEventListener('mousemove', e => {
-    mx = e.clientX;
-    my = e.clientY;
-    cursor.style.left = mx - 6 + 'px';
-    cursor.style.top = my - 6 + 'px';
+(function anim() {
+  tx += (mx - tx) * 0.12;
+  ty += (my - ty) * 0.12;
+  trail.style.left = tx - 18 + 'px';
+  trail.style.top = ty - 18 + 'px';
+  requestAnimationFrame(anim);
+})();
+
+document.querySelectorAll('a,button,.skill-card,.project-card,.service-card,.stat-card').forEach(el => {
+  el.addEventListener('mouseenter', () => {
+    cursor.style.transform = 'scale(2.5)';
+    trail.style.transform = 'scale(1.5)';
   });
-
-  (function anim() {
-    tx += (mx - tx) * 0.12;
-    ty += (my - ty) * 0.12;
-    trail.style.left = tx - 18 + 'px';
-    trail.style.top = ty - 18 + 'px';
-    requestAnimationFrame(anim);
-  })();
-
-  document.querySelectorAll('a,button,.skill-card,.project-card,.service-card,.stat-card').forEach(el => {
-    el.addEventListener('mouseenter', () => {
-      cursor.style.transform = 'scale(2.5)';
-      trail.style.transform = 'scale(1.5)';
-    });
-    el.addEventListener('mouseleave', () => {
-      cursor.style.transform = 'scale(1)';
-      trail.style.transform = 'scale(1)';
-    });
+  el.addEventListener('mouseleave', () => {
+    cursor.style.transform = 'scale(1)';
+    trail.style.transform = 'scale(1)';
   });
-} else {
-  const cursor = document.getElementById('cursor');
-  const trail = document.getElementById('cursorTrail');
-  if (cursor) cursor.style.display = 'none';
-  if (trail) trail.style.display = 'none';
-  document.body.style.cursor = 'auto';
-}
+});
 
 /* ══════════════════════════════
    MOBILE MENU
