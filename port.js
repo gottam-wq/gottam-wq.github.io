@@ -1,8 +1,14 @@
 /* ══════════════════════════════
+   DETECT MOBILE / TOUCH
+══════════════════════════════ */
+const isMobile = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0) || (window.innerWidth <= 768);
+
+/* ══════════════════════════════
    MATRIX RAIN
 ══════════════════════════════ */
 (function () {
   const c = document.getElementById('matrixCanvas');
+  if (!c) return;
   const ctx = c.getContext('2d');
 
   function resize() {
@@ -13,7 +19,7 @@
   window.addEventListener('resize', resize);
 
   const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%&<>/\\|{}[]GOTTAMSAINI';
-  const fs = 14;
+  const fs = isMobile ? 11 : 14;
   let cols, drops;
 
   function init() {
@@ -26,7 +32,7 @@
     ctx.fillStyle = 'rgba(0,0,0,0.05)';
     ctx.fillRect(0, 0, c.width, c.height);
     ctx.fillStyle = '#00f5a0';
-    ctx.font = fs + 'px Space Mono,monospace';
+    ctx.font = fs + 'px monospace';
     drops.forEach((y, i) => {
       const ch = chars[Math.floor(Math.random() * chars.length)];
       ctx.fillText(ch, i * fs, y * fs);
@@ -40,7 +46,32 @@
    HACKER LOADER
 ══════════════════════════════ */
 (function () {
-  const lines = [
+  const loader = document.getElementById('loader');
+  if (!loader) return;
+
+  // Safety net — agar kuch bhi galat ho to 5 sec mein forcefully hide
+  const FORCE_HIDE_MS = 5000;
+  const forceTimer = setTimeout(() => hideLoader(), FORCE_HIDE_MS);
+
+  function hideLoader() {
+    clearTimeout(forceTimer);
+    loader.style.transition = 'opacity 0.6s ease';
+    loader.style.opacity = '0';
+    setTimeout(() => {
+      loader.style.display = 'none';
+      loader.style.visibility = 'hidden';
+      loader.style.pointerEvents = 'none';
+      document.body.style.overflow = '';
+    }, 650);
+  }
+
+  // Mobile pe lines kam aur fast dikhao
+  const lines = isMobile ? [
+    { text: '<span class="ok">✓</span> Loading portfolio...', delay: 0 },
+    { text: '<span class="info">HTML · CSS · JS · PHP · Python · WP · GHL</span>', delay: 400 },
+    { text: '<span class="warn">⚡</span> Booting interface...', delay: 800 },
+    { text: '<span class="ok">✓ ACCESS GRANTED — Welcome!</span>', delay: 1200 },
+  ] : [
     { text: '<span class="prompt">$ </span><span class="cmd">init portfolio.js</span>', delay: 0 },
     { text: '<span class="ok">✓</span> Loading modules...', delay: 350 },
     { text: '<span class="prompt">$ </span><span class="cmd">import { skills } from "./gottam"</span>', delay: 650 },
@@ -54,58 +85,75 @@
   const container = document.getElementById('hackerLines');
   const prog = document.getElementById('hackerProgress');
   const pct = document.getElementById('hackerPct');
-  const loader = document.getElementById('loader');
 
   lines.forEach((l, i) => {
     setTimeout(() => {
+      if (!container) return;
       const d = document.createElement('div');
       d.className = 'hacker-line';
       d.innerHTML = l.text;
       container.appendChild(d);
       requestAnimationFrame(() => requestAnimationFrame(() => d.classList.add('show')));
       const p = Math.round(((i + 1) / lines.length) * 100);
-      prog.style.width = p + '%';
-      pct.textContent = p + '%';
+      if (prog) prog.style.width = p + '%';
+      if (pct) pct.textContent = p + '%';
     }, l.delay);
   });
 
-  setTimeout(() => {
-    loader.classList.add('hide');
-  }, 3200);
+  // Mobile: 1800ms, Desktop: 3200ms
+  setTimeout(hideLoader, isMobile ? 1800 : 3200);
 })();
 
 /* ══════════════════════════════
-   CUSTOM CURSOR
+   CUSTOM CURSOR — Desktop Only
 ══════════════════════════════ */
-const cursor = document.getElementById('cursor');
-const trail = document.getElementById('cursorTrail');
-let mx = 0, my = 0, tx = 0, ty = 0;
+if (!isMobile) {
+  const cursor = document.getElementById('cursor');
+  const trail = document.getElementById('cursorTrail');
+  let mx = 0, my = 0, tx = 0, ty = 0;
 
-document.addEventListener('mousemove', e => {
-  mx = e.clientX;
-  my = e.clientY;
-  cursor.style.left = mx - 6 + 'px';
-  cursor.style.top = my - 6 + 'px';
-});
+  if (cursor && trail) {
+    cursor.style.display = 'block';
+    trail.style.display = 'block';
 
-(function anim() {
-  tx += (mx - tx) * 0.12;
-  ty += (my - ty) * 0.12;
-  trail.style.left = tx - 18 + 'px';
-  trail.style.top = ty - 18 + 'px';
-  requestAnimationFrame(anim);
-})();
+    document.addEventListener('mousemove', e => {
+      mx = e.clientX;
+      my = e.clientY;
+      cursor.style.left = mx - 6 + 'px';
+      cursor.style.top = my - 6 + 'px';
+    });
 
-document.querySelectorAll('a,button,.skill-card,.project-card,.service-card,.stat-card').forEach(el => {
-  el.addEventListener('mouseenter', () => {
-    cursor.style.transform = 'scale(2.5)';
-    trail.style.transform = 'scale(1.5)';
+    (function anim() {
+      tx += (mx - tx) * 0.12;
+      ty += (my - ty) * 0.12;
+      trail.style.left = tx - 18 + 'px';
+      trail.style.top = ty - 18 + 'px';
+      requestAnimationFrame(anim);
+    })();
+
+    document.querySelectorAll('a,button,.skill-card,.project-card,.service-card,.stat-card').forEach(el => {
+      el.addEventListener('mouseenter', () => {
+        cursor.style.transform = 'scale(2.5)';
+        trail.style.transform = 'scale(1.5)';
+      });
+      el.addEventListener('mouseleave', () => {
+        cursor.style.transform = 'scale(1)';
+        trail.style.transform = 'scale(1)';
+      });
+    });
+  }
+} else {
+  // Mobile pe cursor elements hide karo aur body cursor normal rakho
+  const cursor = document.getElementById('cursor');
+  const trail = document.getElementById('cursorTrail');
+  if (cursor) cursor.style.display = 'none';
+  if (trail) trail.style.display = 'none';
+  document.body.style.cursor = 'auto';
+  // Mobile pe sab clickable elements ka cursor auto
+  document.querySelectorAll('a,button,.btn,.skill-card,.project-card,.service-card,.fab').forEach(el => {
+    el.style.cursor = 'pointer';
   });
-  el.addEventListener('mouseleave', () => {
-    cursor.style.transform = 'scale(1)';
-    trail.style.transform = 'scale(1)';
-  });
-});
+}
 
 /* ══════════════════════════════
    MOBILE MENU
